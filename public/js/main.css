@@ -1,0 +1,57 @@
+.customTableInput{
+	background-color: transparent;
+	border: none;
+	color: #3d3d3d;
+}
+
+.customTableInput:focus{
+	outline: none;
+}
+
+div#pagination ul li:first-child{
+	margin-right: 30px;
+}
+
+input:focus{
+	box-shadow: none;
+}
+
+div#floatingButtonnn{
+	position: fixed;
+	right: 0px;
+	top: 270px;
+	transition: all 0.2s ease-in 0s;
+	z-index: 9999;
+	cursor: pointer;
+}
+
+div#floatingButtonnn:hover{
+	right: -10px;
+}
+
+div#floatingButtonn{
+	position: fixed;
+	right: 0px;
+	top: 270px;
+	transition: all 0.2s ease-in 0s;
+	z-index: 9999;
+	cursor: pointer;
+}
+
+div#floatingButtonn:hover{
+	right: -10px;
+}
+
+div#floatingButton{
+	position: fixed;
+	right: 0px;
+	top: 270px;
+	transition: all 0.2s ease-in 0s;
+	z-index: 9999;
+	cursor: pointer;
+}
+
+div#floatingButton:hover{
+	right: -10px;
+}
+

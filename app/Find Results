@@ -1,0 +1,1555 @@
+Searching 8275 files for "States"
+
+/Applications/MAMP/htdocs/digc/app/Counselor.php:
+   14  
+   15  	{
+   16: 		return $this->BelongsTo('App\States', 'id_state', 'id_state');
+   17  
+   18  	}
+
+/Applications/MAMP/htdocs/digc/app/Http/Controllers/LocationController.php:
+   31          $param['people'] = \App\People::all();
+   32          $param['pastors'] = \App\Pastor::all();
+   33:         $param['states'] = \App\State::all();
+   34  		$param['zones'] = \App\GeoPolZone::all();
+   35  		// $param['attendances'] = \App\Attendance::all();
+   ..
+   67          // $id = \Crypt::decrypt($id);
+   68          $param['location'] = \App\Location::find($id);
+   69:         $param['states'] = \App\State::all();
+   70          $param['zones'] = \App\GeoPolZone::all();
+   71          $param['pas'] = \App\PeopleAwarenessSource::all();
+
+/Applications/MAMP/htdocs/digc/app/Http/Controllers/MembersController.php:
+   31          $param['people'] = \App\People::all();
+   32          $param['homecells'] = \App\Homecell::all();
+   33:         $param['states'] = \App\State::all();
+   34  		$param['zones'] = \App\GeoPolZone::all();
+   35  		$param['mstatus'] = \App\MaritalStatus::all();
+   ..
+  330  			$mbrs['people'] = People::all();
+  331  			$mbrs['locations'] = Location::all();
+  332: 			$mbrs['state'] = States::all();
+  333  			$mbrs['lga'] = LGA::all();
+  334  			$mbrs['m_status'] = Mstatus::all();
+
+/Applications/MAMP/htdocs/digc/app/Lga.php:
+   13      public function getLga()
+   14      {
+   15:      return $this->BelongsTo('App\States', 'state_code', 'state_code');
+   16      }
+   17  }
+
+/Applications/MAMP/htdocs/digc/app/Location.php:
+    8  	public function loc_state()
+    9  	{
+   10: 		return $this->BelongsTo('App\States', 'id_state', 'id');
+   11  	}
+   12  
+
+/Applications/MAMP/htdocs/digc/app/Member.php:
+   13  	 public function get_mState()
+   14  	 {
+   15: 	 	return $this->BelongsTo('App\States', 'id_state', 'id_state');
+   16  	 }
+   17  
+
+/Applications/MAMP/htdocs/digc/app/Pastor.php:
+   17  
+   18  	{
+   19: 		return $this->BelongsTo('App\States', 'id_state', 'id_state');
+   20  	}
+   21  
+
+/Applications/MAMP/htdocs/digc/app/Pastors.php:
+   17  
+   18  	{
+   19: 		return $this->BelongsTo('App\States', 'id_state', 'id_state');
+   20  
+   21  	}
+
+/Applications/MAMP/htdocs/digc/app/States.php:
+    5  use Illuminate\Database\Eloquent\Model;
+    6  
+    7: class States extends Model
+    8  {
+    9     	
+
+/Applications/MAMP/htdocs/digc/public/js/app.js:
+    <binary>
+
+/Applications/MAMP/htdocs/digc/public/js/app2.js:
+    <binary>
+
+/Applications/MAMP/htdocs/digc/resources/views/hr/pastors/index.blade.php:
+   55      <!-- Page Script  -->
+   56      <?php
+   57:         $states = \App\State::all(); 
+   58          $lgas = \App\Lga::all();            
+   59      ?>
+   60      <script hidden="">
+   61:       var states = <?= json_encode($states); ?>;
+   62        var lgas = <?= json_encode($lgas); ?>;
+   63      </script>
+
+/Applications/MAMP/htdocs/digc/resources/views/locations/index.blade.php:
+   60      <!-- Page Script  -->
+   61       <?php
+   62:         $states = \App\State::all(); 
+   63          $lgas = \App\Lga::all();            
+   64      ?>
+   65      <script hidden="">
+   66:       var states = <?= json_encode($states); ?>;
+   67        var lgas = <?= json_encode($lgas); ?>;
+   68      </script>
+
+/Applications/MAMP/htdocs/digc/resources/views/locations/modals/new.blade.php:
+   46  									Desired Role(s) <span class="symbol required"></span>
+   47  								</label>
+   48: 								<select class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   49  				                    <option>select role</option>
+   50  				                </select>
+
+/Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php:
+   63                          <select class="custom-select select2" required name="state" id="state">
+   64                              <option value="">Select Host State</option>
+   65:                             @foreach($states as $state)
+   66                              <option value="{{$state->id}}">{{$state->state}}</option>
+   67                              @endforeach
+
+/Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php:
+  905                                      <option value="">Select Host State</option>
+  906                                      <option selected="" value="{{isset($location->loc_state) ? $location->loc_state->id : "1"}}">{{isset($location->loc_state) ? $location->loc_state->state : "Select from the list"}}</option>
+  907:                                     @foreach($states as $state)
+  908                                      <option value="{{$state->id}}">{{$state->state}}</option>
+  909                                      @endforeach
+  ...
+  949  <!-- Page Script  -->
+  950   <?php
+  951:     $states = \App\State::all(); 
+  952      $lgas = \App\Lga::all();            
+  953  ?>
+  954  <script hidden="">
+  955:   var states = <?= json_encode($states); ?>;
+  956    var lgas = <?= json_encode($lgas); ?>;
+  957  </script>
+
+/Applications/MAMP/htdocs/digc/resources/views/members/converts/one.blade.php:
+  316  <!-- Page Script  -->
+  317   <?php
+  318:     $states = \App\State::all(); 
+  319      $lgas = \App\Lga::all();            
+  320  ?>
+  321  <script hidden="">
+  322:   var states = <?= json_encode($states); ?>;
+  323    var lgas = <?= json_encode($lgas); ?>;
+  324  </script>
+
+/Applications/MAMP/htdocs/digc/resources/views/members/filtermembers.blade.php:
+   81                      <select class="custom-select select2" required name="state" id="state">
+   82                          <option value=""> State of Origin</option>
+   83:                         @foreach($states as $state)
+   84                          <option value="{{$state->id}}">{{$state->state}}</option>
+   85                          @endforeach
+
+/Applications/MAMP/htdocs/digc/resources/views/members/newmember.blade.php:
+   81                      <select class="custom-select select2" required name="state" id="state">
+   82                          <option value=""> State of Origin</option>
+   83:                         @foreach($states as $state)
+   84                          <option value="{{$state->id}}">{{$state->state}}</option>
+   85                          @endforeach
+
+/Applications/MAMP/htdocs/digc/resources/views/systems/users/editaddrole.blade.php:
+   18  									Select Desired Role(s) for {{ $user->surname}} <span class="symbol required"></span>
+   19  								</label>
+   20: 								<select class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   21  				                    @foreach($rolex as $rl)
+   22  				                    	<option value="{{$rl->id}}">{{$rl->name}}</option>
+
+/Applications/MAMP/htdocs/digc/resources/views/systems/users/editremoverole.blade.php:
+   18  									Select Role(s) to be detached from {{ $user->surname}} <span class="symbol required"></span>
+   19  								</label>
+   20: 								<select  class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   21  				                    @foreach($rolex as $rl)
+   22  				                    	<option value="{{$rl->id}}">{{$rl->name}}</option>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/0641a1ebb02f5f61588064995cae03a115c4ab73.php:
+  317  <!-- Page Script  -->
+  318   <?php
+  319:     $states = \App\State::all(); 
+  320      $lgas = \App\Lga::all();            
+  321  ?>
+  322  <script hidden="">
+  323:   var states = <?= json_encode($states); ?>;
+  324    var lgas = <?= json_encode($lgas); ?>;
+  325  </script>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/35f079a0d04dedd23042aff715102bf20776d03f.php:
+  904                                      <option value="">Select Host State</option>
+  905                                      <option selected="" value="<?php echo e(isset($location->loc_state) ? $location->loc_state->id : "1"); ?>"><?php echo e(isset($location->loc_state) ? $location->loc_state->state : "Select from the list"); ?></option>
+  906:                                     <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  907                                      <option value="<?php echo e($state->id); ?>"><?php echo e($state->state); ?></option>
+  908                                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  ...
+  948  <!-- Page Script  -->
+  949   <?php
+  950:     $states = \App\State::all(); 
+  951      $lgas = \App\Lga::all();            
+  952  ?>
+  953  <script hidden="">
+  954:   var states = <?= json_encode($states); ?>;
+  955    var lgas = <?= json_encode($lgas); ?>;
+  956  </script>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:
+   64                          <select class="custom-select select2" required name="state" id="state">
+   65                              <option value="">Select Host State</option>
+   66:                             <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+   67                              <option value="<?php echo e($state->id); ?>"><?php echo e($state->state); ?></option>
+   68                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/5383898e8c784be6574179b81edd6011b911f0ee.php:
+   82                      <select class="custom-select select2" required name="state" id="state">
+   83                          <option value=""> State of Origin</option>
+   84:                         <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+   85                          <option value="<?php echo e($state->id); ?>"><?php echo e($state->state); ?></option>
+   86                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/6d50bfec3ee7a3b703ac19a5e24b37ddac975b7e.php:
+   19  									Select Role(s) to be detached from <?php echo e($user->surname); ?> <span class="symbol required"></span>
+   20  								</label>
+   21: 								<select  class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   22  				                    <?php $__currentLoopData = $rolex; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+   23  				                    	<option value="<?php echo e($rl->id); ?>"><?php echo e($rl->name); ?></option>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/ba5031352f6ca2738756b2555b7225bd9fed8d5c.php:
+   19  									Select Desired Role(s) for <?php echo e($user->surname); ?> <span class="symbol required"></span>
+   20  								</label>
+   21: 								<select class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   22  				                    <?php $__currentLoopData = $rolex; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rl): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+   23  				                    	<option value="<?php echo e($rl->id); ?>"><?php echo e($rl->name); ?></option>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/c967a52972c5585190e2fca7f562ae5ce000ec59.php:
+   58      <!-- Page Script  -->
+   59       <?php
+   60:         $states = \App\State::all(); 
+   61          $lgas = \App\Lga::all();            
+   62      ?>
+   63      <script hidden="">
+   64:       var states = <?= json_encode($states); ?>;
+   65        var lgas = <?= json_encode($lgas); ?>;
+   66      </script>
+
+/Applications/MAMP/htdocs/digc/storage/framework/views/f2ca1187280e5b8b9ddd5257a30380d7c023f820.php:
+   47  									Desired Role(s) <span class="symbol required"></span>
+   48  								</label>
+   49: 								<select class="js-example-basic-multiple js-states" name="role_id[]" multiple="" style="width: 100%;">
+   50  				                    <option>select role</option>
+   51  				                </select>
+
+/Applications/MAMP/htdocs/digc/storage/logs/laravel.log:
+ 1868  #55 {main}
+ 1869  "} 
+ 1870: [2018-10-06 20:44:53] local.ERROR: Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) {"userId":1,"email":"admin@digc.org","exception":"[object] (ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:48, ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:48, ErrorException(code: 0): Undefined variable: states at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:48)
+ 1871  [stacktrace]
+ 1872  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ ....
+ 3433  #55 {main}
+ 3434  "} 
+ 3435: [2018-10-12 15:06:39] local.ERROR: Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) {"exception":"[object] (ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:57, ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:57, ErrorException(code: 0): Undefined variable: states at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:57)
+ 3436  [stacktrace]
+ 3437  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ ....
+ 7183  #58 {main}
+ 7184  "} 
+ 7185: [2018-10-16 14:24:01] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'states.id_state' in 'where clause' (SQL: select * from `states` where `states`.`id_state` = 15 limit 1) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":1,"email":"admin@digc.org","exception":"[object] (ErrorException(code: 0): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'states.id_state' in 'where clause' (SQL: select * from `states` where `states`.`id_state` = 15 limit 1) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'states.id_state' in 'where clause' (SQL: select * from `states` where `states`.`id_state` = 15 limit 1) at /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, Doctrine\\DBAL\\Driver\\PDOException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'states.id_state' in 'where clause' at /Applications/MAMP/htdocs/digc/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:79, PDOException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'states.id_state' in 'where clause' at /Applications/MAMP/htdocs/digc/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/PDOConnection.php:77)
+ 7186  [stacktrace]
+ 7187  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(Illuminate\\Database\\QueryException), 0)
+ ....
+ 7742  #55 {main}
+ 7743  "} 
+ 7744: [2018-10-16 21:29:03] local.ERROR: Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) {"userId":1,"email":"admin@digc.org","exception":"[object] (ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66, ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66, ErrorException(code: 0): Undefined variable: states at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66)
+ 7745  [stacktrace]
+ 7746  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ ....
+ 7801  #55 {main}
+ 7802  "} 
+ 7803: [2018-10-16 21:29:28] local.ERROR: Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) {"userId":1,"email":"admin@digc.org","exception":"[object] (ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66, ErrorException(code: 0): Undefined variable: states (View: /Applications/MAMP/htdocs/digc/resources/views/locations/new.blade.php) at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66, ErrorException(code: 0): Undefined variable: states at /Applications/MAMP/htdocs/digc/storage/framework/views/50b7ab9a8f3b7e687ffe61deec20bcc053127f5a.php:66)
+ 7804  [stacktrace]
+ 7805  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ ....
+ 54615  #58 {main}
+ 54616  "} 
+ 54617: [2018-10-31 12:56:33] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 54618  [stacktrace]
+ 54619  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 54677  #58 {main}
+ 54678  "} 
+ 54679: [2018-10-31 12:57:11] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 54680  [stacktrace]
+ 54681  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 54739  #58 {main}
+ 54740  "} 
+ 54741: [2018-10-31 12:58:06] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 54742  [stacktrace]
+ 54743  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 54863  #58 {main}
+ 54864  "} 
+ 54865: [2018-10-31 12:59:33] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 54866  [stacktrace]
+ 54867  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 54987  #58 {main}
+ 54988  "} 
+ 54989: [2018-10-31 13:26:05] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 54990  [stacktrace]
+ 54991  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55049  #58 {main}
+ 55050  "} 
+ 55051: [2018-10-31 13:27:14] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55052  [stacktrace]
+ 55053  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55111  #58 {main}
+ 55112  "} 
+ 55113: [2018-10-31 13:28:17] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55114  [stacktrace]
+ 55115  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55173  #58 {main}
+ 55174  "} 
+ 55175: [2018-10-31 13:28:23] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55176  [stacktrace]
+ 55177  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55235  #58 {main}
+ 55236  "} 
+ 55237: [2018-10-31 13:28:36] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55238  [stacktrace]
+ 55239  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55297  #58 {main}
+ 55298  "} 
+ 55299: [2018-10-31 13:28:44] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55300  [stacktrace]
+ 55301  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55421  #58 {main}
+ 55422  "} 
+ 55423: [2018-10-31 13:30:06] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55424  [stacktrace]
+ 55425  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55808  #61 {main}
+ 55809  "} 
+ 55810: [2018-10-31 14:19:22] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55811  [stacktrace]
+ 55812  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55870  #58 {main}
+ 55871  "} 
+ 55872: [2018-10-31 14:20:43] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55873  [stacktrace]
+ 55874  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55932  #58 {main}
+ 55933  "} 
+ 55934: [2018-10-31 14:21:48] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55935  [stacktrace]
+ 55936  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 55994  #58 {main}
+ 55995  "} 
+ 55996: [2018-10-31 14:23:07] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 55997  [stacktrace]
+ 55998  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56056  #58 {main}
+ 56057  "} 
+ 56058: [2018-10-31 14:23:44] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56059  [stacktrace]
+ 56060  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56118  #58 {main}
+ 56119  "} 
+ 56120: [2018-10-31 14:23:58] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56121  [stacktrace]
+ 56122  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56180  #58 {main}
+ 56181  "} 
+ 56182: [2018-10-31 14:27:37] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56183  [stacktrace]
+ 56184  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56242  #58 {main}
+ 56243  "} 
+ 56244: [2018-10-31 14:28:43] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56245  [stacktrace]
+ 56246  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56304  #58 {main}
+ 56305  "} 
+ 56306: [2018-10-31 14:35:31] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56307  [stacktrace]
+ 56308  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56366  #58 {main}
+ 56367  "} 
+ 56368: [2018-10-31 14:36:30] local.ERROR: include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444, ErrorException(code: 0): include(/Applications/MAMP/htdocs/digc/vendor/composer/../../app/States.php): failed to open stream: No such file or directory at /Applications/MAMP/htdocs/digc/vendor/composer/ClassLoader.php:444)
+ 56369  [stacktrace]
+ 56370  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 0)
+ .....
+ 56428  #58 {main}
+ 56429  "} 
+ 56430: [2018-10-31 14:37:01] local.ERROR: Class 'App\States' not found (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) {"userId":11,"email":"opeter@aaaa.com","exception":"[object] (ErrorException(code: 0): Class 'App\\States' not found (View: /Applications/MAMP/htdocs/digc/resources/views/locations/viewone.blade.php) at /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasRelationships.php:653, Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\States' not found at /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasRelationships.php:653)
+ 56431  [stacktrace]
+ 56432  #0 /Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(47): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(Symfony\\Component\\Debug\\Exception\\FatalThrowableError), 0)
+
+/Applications/MAMP/htdocs/digc/vendor/composer/autoload_classmap.php:
+   72      'App\\ServiceType' => $baseDir . '/app/ServiceType.php',
+   73      'App\\State' => $baseDir . '/app/State.php',
+   74:     'App\\States' => $baseDir . '/app/States.php',
+   75      'App\\SystemPreference' => $baseDir . '/app/SystemPreference.php',
+   76      'App\\User' => $baseDir . '/app/User.php',
+
+/Applications/MAMP/htdocs/digc/vendor/composer/autoload_static.php:
+  517          'App\\ServiceType' => __DIR__ . '/../..' . '/app/ServiceType.php',
+  518          'App\\State' => __DIR__ . '/../..' . '/app/State.php',
+  519:         'App\\States' => __DIR__ . '/../..' . '/app/States.php',
+  520          'App\\SystemPreference' => __DIR__ . '/../..' . '/app/SystemPreference.php',
+  521          'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+
+/Applications/MAMP/htdocs/digc/vendor/doctrine/dbal/lib/Doctrine/DBAL/Driver/OCI8/OCI8Statement.php:
+   96       * placeholders and converted to a named parameter.
+   97       *
+   98:      * The algorithm uses a state machine with two possible states: InLiteral and NotInLiteral.
+   99       * Question marks inside literal strings are therefore handled correctly by this method.
+  100       * This comes at a cost, the whole sql statement has to be looped over.
+
+/Applications/MAMP/htdocs/digc/vendor/doctrine/dbal/lib/Doctrine/DBAL/Query/QueryBuilder.php:
+   49  
+   50      /*
+   51:      * The builder states.
+   52       */
+   53      const STATE_DIRTY = 0;
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/lib/Cpdf.php:
+   87       * @var integer Number of graphic state resources used
+   88       */
+   89:     private $numStates = 0;
+   90  
+   91      /**
+   92       * @var array Number of graphic state resources used
+   93       */
+   94:     private $gstates = array();
+   95  
+   96      /**
+   ..
+  129       * it is used to temporarily change to another state, then change back to what it was before
+  130       */
+  131:     public $stateStack = array();
+  132  
+  133      /**
+  134       * @var integer Number of elements within the state stack
+  135       */
+  136:     public $nStateStack = 0;
+  137  
+  138      /**
+  ...
+  675  
+  676              case 'extGState':
+  677:                 $o['info']['extGStates'][] = array('objNum' => $options['objNum'], 'stateNum' => $options['stateNum']);
+  678                  break;
+  679  
+  ...
+  693                      if ((isset($o['info']['fonts']) && count($o['info']['fonts'])) ||
+  694                          isset($o['info']['procset']) ||
+  695:                         (isset($o['info']['extGStates']) && count($o['info']['extGStates']))
+  696                      ) {
+  697                          $res .= "\n/Resources <<";
+  ...
+  717                          }
+  718  
+  719:                         if (isset($o['info']['extGStates']) && count($o['info']['extGStates'])) {
+  720                              $res .= "\n/ExtGState << ";
+  721:                             foreach ($o['info']['extGStates'] as $gstate) {
+  722                                  $res .= "\n/GS" . $gstate['stateNum'] . " " . $gstate['objNum'] . " 0 R";
+  723                              }
+  ...
+ 1990  
+ 1991                  // Tell the pages about the new resource
+ 1992:                 $this->numStates++;
+ 1993:                 $this->o_pages($this->currentNode, 'extGState', array("objNum" => $id, "stateNum" => $this->numStates));
+ 1994                  break;
+ 1995  
+ ....
+ 3127      {
+ 3128          // Create a new graphics state object if necessary
+ 3129:         if (($gstate = array_search($parameters, $this->gstates)) === false) {
+ 3130              $this->numObj++;
+ 3131              $this->o_extGState($this->numObj, 'new', $parameters);
+ 3132:             $gstate = $this->numStates;
+ 3133:             $this->gstates[$gstate] = $parameters;
+ 3134          }
+ 3135          $this->addContent("\n/GS$gstate gs");
+ ....
+ 3826          // then on the new page, re-open them with the right setings
+ 3827  
+ 3828:         if ($this->nStateStack) {
+ 3829:             for ($i = $this->nStateStack; $i >= 1; $i--) {
+ 3830                  $this->restoreState($i);
+ 3831              }
+ ....
+ 3845  
+ 3846          // if there is a stack saved, then put that onto the page
+ 3847:         if ($this->nStateStack) {
+ 3848:             for ($i = 1; $i <= $this->nStateStack; $i++) {
+ 3849                  $this->saveState($i);
+ 3850              }
+ ....
+ 4441              // end of the previous page, before the stack was closed down
+ 4442              // This is to get around not being able to have open 'q' across pages
+ 4443:             $opt = $this->stateStack[$pageEnd];
+ 4444              // ok to use this as stack starts numbering at 1
+ 4445              $this->setColor($opt['col'], true);
+ ....
+ 4448              //    $this->currentLineStyle = $opt['lin'];
+ 4449          } else {
+ 4450:             $this->nStateStack++;
+ 4451:             $this->stateStack[$this->nStateStack] = array(
+ 4452                  'col' => $this->currentColor,
+ 4453                  'str' => $this->currentStrokeColor,
+ ....
+ 4467      {
+ 4468          if (!$pageEnd) {
+ 4469:             $n = $this->nStateStack;
+ 4470:             $this->currentColor = $this->stateStack[$n]['col'];
+ 4471:             $this->currentStrokeColor = $this->stateStack[$n]['str'];
+ 4472:             $this->addContent("\n" . $this->stateStack[$n]['lin']);
+ 4473:             $this->currentLineStyle = $this->stateStack[$n]['lin'];
+ 4474:             $this->stateStack[$n] = null;
+ 4475:             unset($this->stateStack[$n]);
+ 4476:             $this->nStateStack--;
+ 4477          }
+ 4478  
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/lib/html5lib/Tokenizer.php:
+  185                          /* U+0026 AMPERSAND (&)
+  186                          When the content model flag is set to one of the PCDATA or RCDATA
+  187:                         states and the escape flag is false: switch to the
+  188                          character reference data state. Otherwise: treat it as per
+  189                          the "anything else" entry below. */
+  ...
+  452                      ) {
+  453                          /* If the content model flag is set to the RCDATA or CDATA
+  454:                         states... */
+  455                          $name = strtolower($this->stream->charsWhile(self::ALPHA));
+  456                          $following = $this->stream->char();
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/lib/html5lib/TreeBuilder.php:
+ 3288                  return true;
+ 3289  
+ 3290:                 // We've expanded the logic for these states a little differently;
+ 3291                  // Hixie's refactoring into "specific scope" is more general, but
+ 3292                  // this "gets the job done"
+ 3293  
+ 3294:             // these are the common states for all scopes
+ 3295              } elseif ($node->tagName === 'table' || $node->tagName === 'html') {
+ 3296                  return false;
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/LICENSE.LGPL:
+  248  contains portions of the Library), rather than a "work that uses the
+  249  library".  The executable is therefore covered by this License.
+  250: Section 6 states terms for distribution of such executables.
+  251  
+  252    When a "work that uses the Library" uses material from a header file
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/src/Adapter/PDFLib.php:
+  129       * @var array
+  130       */
+  131:     private $_gstates = array();
+  132  
+  133      /**
+  ...
+  624      public function _set_gstate($gstate_options)
+  625      {
+  626:         if (($gstate = array_search($gstate_options, $this->_gstates)) === false) {
+  627              $gstate = $this->_pdf->create_gstate($gstate_options);
+  628:             $this->_gstates[$gstate] = $gstate_options;
+  629          }
+  630          return $this->_pdf->set_gstate($gstate);
+
+/Applications/MAMP/htdocs/digc/vendor/dompdf/dompdf/src/Dompdf.php:
+  624                      // HTML 4.0 spec:
+  625                      // http://www.w3.org/TR/REC-html40/present/styles.html#adef-media
+  626:                     // which states that the default media type is 'screen'
+  627                      if ($tag->hasAttributes() &&
+  628                          ($media = $tag->getAttribute("media")) &&
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/CHANGELOG.md:
+  133  - Add personal ID, VAT for zh\_TW [\#1135](https://github.com/fzaninotto/Faker/pull/1135) ([Dagolin](https://github.com/Dagolin))
+  134  - Updating ninth digit on whole country [\#1132](https://github.com/fzaninotto/Faker/pull/1132) ([gpressutto5](https://github.com/gpressutto5))
+  135: - Indian states added to en\_IN locale [\#1131](https://github.com/fzaninotto/Faker/pull/1131) ([jiveshsg](https://github.com/jiveshsg))
+  136  - Add Text provider for ro\_MD [\#1129](https://github.com/fzaninotto/Faker/pull/1129) ([wecerny](https://github.com/wecerny))
+  137  - Add strict to randomNumber example [\#1124](https://github.com/fzaninotto/Faker/pull/1124) ([leepownall](https://github.com/leepownall))
+  ...
+  249  - Added Iranian (fa\_IR) `PhoneNumber` provider [\#833](https://github.com/fzaninotto/Faker/pull/833) ([ghost](https://github.com/ghost))
+  250  - Add Brazilian (pt\_BR) `region` and `regionAbbr` formatters [\#828](https://github.com/fzaninotto/Faker/pull/828) ([francinaldo](https://github.com/francinaldo))
+  251: - Improved Austrian (de\_AT) names, states, and realtext [\#826](https://github.com/fzaninotto/Faker/pull/826) ([Findus23](https://github.com/Findus23))
+  252  - Improved German (de\_DE) names [\#825](https://github.com/fzaninotto/Faker/pull/825) ([Findus23](https://github.com/Findus23))
+  253  - Improved Latvian (lv\_LV) first names [\#823](https://github.com/fzaninotto/Faker/pull/823) ([veisis](https://github.com/veisis))
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/de_CH/Text.php:
+ 1694  
+ 1695      Creating the works from public domain print editions means that no
+ 1696:     one owns a United States copyright in these works, so the Foundation
+ 1697:     (and you!) can copy and distribute it in the United States without
+ 1698      permission and without paying copyright royalties.  Special rules,
+ 1699      set forth in the General Terms of Use part of this license, apply to
+ ....
+ 1749      or PGLAF), owns a compilation copyright in the collection of Project
+ 1750      Gutenberg-tm electronic works.  Nearly all the individual works in the
+ 1751:     collection are in the public domain in the United States.  If an
+ 1752:     individual work is in the public domain in the United States and you are
+ 1753:     located in the United States, we do not claim a right to prevent you from
+ 1754      copying, distributing, performing, displaying or creating derivative
+ 1755      works based on the work as long as all references to Project Gutenberg
+ ....
+ 1764      1.D.  The copyright laws of the place where you are located also govern
+ 1765      what you can do with this work.  Copyright laws in most countries are in
+ 1766:     a constant state of change.  If you are outside the United States, check
+ 1767      the laws of your country in addition to the terms of this agreement
+ 1768      before downloading, copying, displaying, performing, distributing or
+ ....
+ 1770      Gutenberg-tm work.  The Foundation makes no representations concerning
+ 1771      the copyright status of any work in any country outside the United
+ 1772:     States.
+ 1773  
+ 1774      1.E.  Unless you have removed all references to Project Gutenberg:
+ ....
+ 1789      from the public domain (does not contain a notice indicating that it is
+ 1790      posted with permission of the copyright holder), the work can be copied
+ 1791:     and distributed to anyone in the United States without paying any fees
+ 1792      or charges.  If you are redistributing or providing access to a work
+ 1793      with the phrase "Project Gutenberg" associated with or appearing on the
+ ....
+ 1915      WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+ 1916  
+ 1917:     1.F.5.  Some states do not allow disclaimers of certain implied
+ 1918      warranties or the exclusion or limitation of certain types of damages.
+ 1919      If any disclaimer or limitation set forth in this agreement violates the
+ ....
+ 1990  
+ 1991      The Foundation is committed to complying with the laws regulating
+ 1992:     charities and charitable donations in all 50 states of the United
+ 1993:     States.  Compliance requirements are not uniform and it takes a
+ 1994      considerable effort, much paperwork and many fees to meet and keep up
+ 1995      with these requirements.  We do not solicit donations in locations
+ ....
+ 1998      particular state visit http://pglaf.org
+ 1999  
+ 2000:     While we cannot and do not solicit contributions from states where we
+ 2001      have not met the solicitation requirements, we know of no prohibition
+ 2002:     against accepting unsolicited donations from donors in such states who
+ 2003      approach us with offers to donate.
+ 2004  
+ 2005      International donations are gratefully accepted, but we cannot make
+ 2006      any statements concerning tax treatment of donations received from
+ 2007:     outside the United States.  U.S. laws alone swamp our small staff.
+ 2008  
+ 2009      Please check the Project Gutenberg Web pages for current donation
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/de_DE/Text.php:
+ 1694  
+ 1695      Creating the works from public domain print editions means that no
+ 1696:     one owns a United States copyright in these works, so the Foundation
+ 1697:     (and you!) can copy and distribute it in the United States without
+ 1698      permission and without paying copyright royalties.  Special rules,
+ 1699      set forth in the General Terms of Use part of this license, apply to
+ ....
+ 1749      or PGLAF), owns a compilation copyright in the collection of Project
+ 1750      Gutenberg-tm electronic works.  Nearly all the individual works in the
+ 1751:     collection are in the public domain in the United States.  If an
+ 1752:     individual work is in the public domain in the United States and you are
+ 1753:     located in the United States, we do not claim a right to prevent you from
+ 1754      copying, distributing, performing, displaying or creating derivative
+ 1755      works based on the work as long as all references to Project Gutenberg
+ ....
+ 1764      1.D.  The copyright laws of the place where you are located also govern
+ 1765      what you can do with this work.  Copyright laws in most countries are in
+ 1766:     a constant state of change.  If you are outside the United States, check
+ 1767      the laws of your country in addition to the terms of this agreement
+ 1768      before downloading, copying, displaying, performing, distributing or
+ ....
+ 1770      Gutenberg-tm work.  The Foundation makes no representations concerning
+ 1771      the copyright status of any work in any country outside the United
+ 1772:     States.
+ 1773  
+ 1774      1.E.  Unless you have removed all references to Project Gutenberg:
+ ....
+ 1789      from the public domain (does not contain a notice indicating that it is
+ 1790      posted with permission of the copyright holder), the work can be copied
+ 1791:     and distributed to anyone in the United States without paying any fees
+ 1792      or charges.  If you are redistributing or providing access to a work
+ 1793      with the phrase "Project Gutenberg" associated with or appearing on the
+ ....
+ 1915      WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+ 1916  
+ 1917:     1.F.5.  Some states do not allow disclaimers of certain implied
+ 1918      warranties or the exclusion or limitation of certain types of damages.
+ 1919      If any disclaimer or limitation set forth in this agreement violates the
+ ....
+ 1990  
+ 1991      The Foundation is committed to complying with the laws regulating
+ 1992:     charities and charitable donations in all 50 states of the United
+ 1993:     States.  Compliance requirements are not uniform and it takes a
+ 1994      considerable effort, much paperwork and many fees to meet and keep up
+ 1995      with these requirements.  We do not solicit donations in locations
+ ....
+ 1998      particular state visit http://pglaf.org
+ 1999  
+ 2000:     While we cannot and do not solicit contributions from states where we
+ 2001      have not met the solicitation requirements, we know of no prohibition
+ 2002:     against accepting unsolicited donations from donors in such states who
+ 2003      approach us with offers to donate.
+ 2004  
+ 2005      International donations are gratefully accepted, but we cannot make
+ 2006      any statements concerning tax treatment of donations received from
+ 2007:     outside the United States.  U.S. laws alone swamp our small staff.
+ 2008  
+ 2009      Please check the Project Gutenberg Web pages for current donation
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_GB/Address.php:
+    9      protected static $buildingNumber = array('###', '##', '#');
+   10      protected static $streetSuffix = array(
+   11:         'Alley', 'Avenue', 'Branch', 'Bridge', 'Brook', 'Brooks', 'Burg', 'Burgs', 'Bypass', 'Camp', 'Canyon', 'Cape', 'Causeway', 'Center', 'Centers', 'Circle', 'Circles', 'Cliff', 'Cliffs', 'Club', 'Common', 'Corner', 'Corners', 'Course', 'Court', 'Courts', 'Cove', 'Coves', 'Creek', 'Crescent', 'Crest', 'Crossing', 'Crossroad', 'Curve', 'Dale', 'Dam', 'Divide', 'Drive', 'Drive', 'Drives', 'Estate', 'Estates', 'Expressway', 'Extension', 'Extensions', 'Fall', 'Falls', 'Ferry', 'Field', 'Fields', 'Flat', 'Flats', 'Ford', 'Fords', 'Forest', 'Forge', 'Forges', 'Fork', 'Forks', 'Fort', 'Garden', 'Gardens', 'Gateway', 'Glen', 'Glens', 'Green', 'Greens', 'Grove', 'Groves', 'Harbour', 'Harbours', 'Haven', 'Heights', 'Highway', 'Hill', 'Hills', 'Hollow', 'Inlet', 'Island', 'Islands', 'Isle', 'Junction', 'Junctions', 'Key', 'Keys', 'Knoll', 'Knolls', 'Lake', 'Lakes', 'Land', 'Landing', 'Lane', 'Light', 'Lights', 'Loaf', 'Lock', 'Locks', 'Locks', 'Lodge', 'Lodge', 'Loop', 'Manor', 'Manors', 'Meadow', 'Meadows', 'Mews', 'Mill', 'Mills', 'Motorway', 'Mount', 'Mountain', 'Mountains', 'Neck', 'Orchard', 'Oval', 'Overpass', 'Park', 'Parks', 'Parkway', 'Parkways', 'Pass', 'Passage', 'Path', 'Pike', 'Pine', 'Pines', 'Place', 'Plain', 'Plains', 'Plaza', 'Point', 'Points', 'Port', 'Ports', 'Radial', 'Ramp', 'Ranch', 'Rapid', 'Rapids', 'Rest', 'Ridge', 'Ridges', 'River', 'Road', 'Road', 'Roads', 'Roads', 'Route', 'Row', 'Rue', 'Run', 'Shoal', 'Shoals', 'Shore', 'Shores', 'Spring', 'Springs', 'Springs', 'Spur', 'Spurs', 'Square', 'Square', 'Squares', 'Squares', 'Station', 'Station', 'Stream', 'Stream', 'Street', 'Streets', 'Summit', 'Terrace', 'Throughway', 'Trace', 'Track', 'Trafficway', 'Trail', 'Tunnel', 'Turnpike', 'Underpass', 'Union', 'Unions', 'Valley', 'Valleys', 'Via', 'Viaduct', 'View', 'Views', 'Village', 'Villages', 'Ville', 'Vista', 'Vista', 'Walk', 'Walks', 'Wall', 'Way', 'Ways', 'Well', 'Wells'
+   12      );
+   13  
+   ..
+   82          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+   83          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+   84:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+   85          'Vanuatu', 'Venezuela', 'Vietnam',
+   86          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_HK/Address.php:
+  124  
+  125      protected static $estateNameFormats = array(
+  126:         '{{syllable}} {{syllable}} {{estateSuffix}}',
+  127:         '{{syllable}} {{syllable}} {{estateSuffix}}',
+  128:         '{{syllable}} {{syllable}} {{estateSuffix}}',
+  129:         '{{syllable}} {{syllable}} {{syllable}} {{estateSuffix}}',
+  130:         '{{syllable}} {{syllable}} {{syllable}} {{estateSuffix}}',
+  131:         '{{syllable}} {{syllable}} {{syllable}} {{estateSuffix}}',
+  132:         '{{town}} {{estateSuffix}}',
+  133      );
+  134  
+  ...
+  136      protected static $villageSuffixes = array('Village', 'Tsuen', 'San Tsuen', 'New Village', 'Wai');
+  137  
+  138:     protected static $estateSuffixes = array('Estate', 'Court');
+  139  
+  140      protected static $streetNameFormats = array(
+  ...
+  224      }
+  225  
+  226:     public function estateSuffix()
+  227      {
+  228:         return static::randomElement(static::$estateSuffixes);
+  229      }
+  230  
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_IN/Address.php:
+   30      protected static $state = array(
+   31          
+   32:         // States
+   33          'Andhra Pradesh', 'Arunachal Pradesh', 'Assam',
+   34          'Bihar',
+   ..
+   82          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+   83          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+   84:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+   85          'Vanuatu', 'Venezuela', 'Vietnam',
+   86          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_NG/Address.php:
+   47          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+   48          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+   49:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+   50          'Vanuatu', 'Venezuela', 'Vietnam',
+   51          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_US/Address.php:
+    9      protected static $buildingNumber = array('%####', '%###', '%##');
+   10      protected static $streetSuffix = array(
+   11:         'Alley', 'Avenue', 'Branch', 'Bridge', 'Brook', 'Brooks', 'Burg', 'Burgs', 'Bypass', 'Camp', 'Canyon', 'Cape', 'Causeway', 'Center', 'Centers', 'Circle', 'Circles', 'Cliff', 'Cliffs', 'Club', 'Common', 'Corner', 'Corners', 'Course', 'Court', 'Courts', 'Cove', 'Coves', 'Creek', 'Crescent', 'Crest', 'Crossing', 'Crossroad', 'Curve', 'Dale', 'Dam', 'Divide', 'Drive', 'Drive', 'Drives', 'Estate', 'Estates', 'Expressway', 'Extension', 'Extensions', 'Fall', 'Falls', 'Ferry', 'Field', 'Fields', 'Flat', 'Flats', 'Ford', 'Fords', 'Forest', 'Forge', 'Forges', 'Fork', 'Forks', 'Fort', 'Freeway', 'Garden', 'Gardens', 'Gateway', 'Glen', 'Glens', 'Green', 'Greens', 'Grove', 'Groves', 'Harbor', 'Harbors', 'Haven', 'Heights', 'Highway', 'Hill', 'Hills', 'Hollow', 'Inlet', 'Inlet', 'Island', 'Island', 'Islands', 'Islands', 'Isle', 'Isle', 'Junction', 'Junctions', 'Key', 'Keys', 'Knoll', 'Knolls', 'Lake', 'Lakes', 'Land', 'Landing', 'Lane', 'Light', 'Lights', 'Loaf', 'Lock', 'Locks', 'Locks', 'Lodge', 'Lodge', 'Loop', 'Mall', 'Manor', 'Manors', 'Meadow', 'Meadows', 'Mews', 'Mill', 'Mills', 'Mission', 'Mission', 'Motorway', 'Mount', 'Mountain', 'Mountain', 'Mountains', 'Mountains', 'Neck', 'Orchard', 'Oval', 'Overpass', 'Park', 'Parks', 'Parkway', 'Parkways', 'Pass', 'Passage', 'Path', 'Pike', 'Pine', 'Pines', 'Place', 'Plain', 'Plains', 'Plains', 'Plaza', 'Plaza', 'Point', 'Points', 'Port', 'Port', 'Ports', 'Ports', 'Prairie', 'Prairie', 'Radial', 'Ramp', 'Ranch', 'Rapid', 'Rapids', 'Rest', 'Ridge', 'Ridges', 'River', 'Road', 'Road', 'Roads', 'Roads', 'Route', 'Row', 'Rue', 'Run', 'Shoal', 'Shoals', 'Shore', 'Shores', 'Skyway', 'Spring', 'Springs', 'Springs', 'Spur', 'Spurs', 'Square', 'Square', 'Squares', 'Squares', 'Station', 'Station', 'Stravenue', 'Stravenue', 'Stream', 'Stream', 'Street', 'Street', 'Streets', 'Summit', 'Summit', 'Terrace', 'Throughway', 'Trace', 'Track', 'Trafficway', 'Trail', 'Trail', 'Tunnel', 'Tunnel', 'Turnpike', 'Turnpike', 'Underpass', 'Union', 'Unions', 'Valley', 'Valleys', 'Via', 'Viaduct', 'View', 'Views', 'Village', 'Village', 'Villages', 'Ville', 'Vista', 'Vista', 'Walk', 'Walks', 'Wall', 'Way', 'Ways', 'Well', 'Wells'
+   12      );
+   13      protected static $postcode = array('#####', '#####-####');
+   ..
+   39          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+   40          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+   41:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+   42          'Vanuatu', 'Venezuela', 'Vietnam',
+   43          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_US/PhoneNumber.php:
+    6  {
+    7      /**
+    8:      * @see https://en.wikipedia.org/wiki/National_conventions_for_writing_telephone_numbers#United_States.2C_Canada.2C_and_other_NANP_countries
+    9       */
+   10      protected static $formats = array(
+   ..
+   45  
+   46      /**
+   47:      * @see https://en.wikipedia.org/wiki/Toll-free_telephone_number#United_States
+   48       */
+   49      protected static $tollFreeAreaCodes = array(
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_US/Text.php:
+ 3378  
+ 3379      Creating the works from public domain print editions means that no
+ 3380:     one owns a United States copyright in these works, so the Foundation
+ 3381:     (and you!) can copy and distribute it in the United States without
+ 3382      permission and without paying copyright royalties.  Special rules,
+ 3383      set forth in the General Terms of Use part of this license, apply to
+ ....
+ 3433      or PGLAF), owns a compilation copyright in the collection of Project
+ 3434      Gutenberg-tm electronic works.  Nearly all the individual works in the
+ 3435:     collection are in the public domain in the United States.  If an
+ 3436:     individual work is in the public domain in the United States and you are
+ 3437:     located in the United States, we do not claim a right to prevent you from
+ 3438      copying, distributing, performing, displaying or creating derivative
+ 3439      works based on the work as long as all references to Project Gutenberg
+ ....
+ 3448      1.D.  The copyright laws of the place where you are located also govern
+ 3449      what you can do with this work.  Copyright laws in most countries are in
+ 3450:     a constant state of change.  If you are outside the United States, check
+ 3451      the laws of your country in addition to the terms of this agreement
+ 3452      before downloading, copying, displaying, performing, distributing or
+ ....
+ 3454      Gutenberg-tm work.  The Foundation makes no representations concerning
+ 3455      the copyright status of any work in any country outside the United
+ 3456:     States.
+ 3457  
+ 3458      1.E.  Unless you have removed all references to Project Gutenberg:
+ ....
+ 3473      from the public domain (does not contain a notice indicating that it is
+ 3474      posted with permission of the copyright holder), the work can be copied
+ 3475:     and distributed to anyone in the United States without paying any fees
+ 3476      or charges.  If you are redistributing or providing access to a work
+ 3477      with the phrase "Project Gutenberg" associated with or appearing on the
+ ....
+ 3599      WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+ 3600  
+ 3601:     1.F.5.  Some states do not allow disclaimers of certain implied
+ 3602      warranties or the exclusion or limitation of certain types of damages.
+ 3603      If any disclaimer or limitation set forth in this agreement violates the
+ ....
+ 3674  
+ 3675      The Foundation is committed to complying with the laws regulating
+ 3676:     charities and charitable donations in all 50 states of the United
+ 3677:     States.  Compliance requirements are not uniform and it takes a
+ 3678      considerable effort, much paperwork and many fees to meet and keep up
+ 3679      with these requirements.  We do not solicit donations in locations
+ ....
+ 3682      particular state visit http://pglaf.org
+ 3683  
+ 3684:     While we cannot and do not solicit contributions from states where we
+ 3685      have not met the solicitation requirements, we know of no prohibition
+ 3686:     against accepting unsolicited donations from donors in such states who
+ 3687      approach us with offers to donate.
+ 3688  
+ 3689      International donations are gratefully accepted, but we cannot make
+ 3690      any statements concerning tax treatment of donations received from
+ 3691:     outside the United States.  U.S. laws alone swamp our small staff.
+ 3692  
+ 3693      Please check the Project Gutenberg Web pages for current donation
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/en_ZA/Address.php:
+    9      protected static $buildingNumber = array('#####', '####', '###');
+   10      protected static $streetSuffix = array(
+   11:         'Alley', 'Avenue', 'Branch', 'Bridge', 'Brook', 'Brooks', 'Burg', 'Burgs', 'Bypass', 'Camp', 'Canyon', 'Cape', 'Causeway', 'Center', 'Centers', 'Circle', 'Circles', 'Cliff', 'Cliffs', 'Club', 'Common', 'Corner', 'Corners', 'Course', 'Court', 'Courts', 'Cove', 'Coves', 'Creek', 'Crescent', 'Crest', 'Crossing', 'Crossroad', 'Curve', 'Dale', 'Dam', 'Divide', 'Drive', 'Drive', 'Drives', 'Estate', 'Estates', 'Expressway', 'Extension', 'Extensions', 'Fall', 'Falls', 'Ferry', 'Field', 'Fields', 'Flat', 'Flats', 'Ford', 'Fords', 'Forest', 'Forge', 'Forges', 'Fork', 'Forks', 'Fort', 'Freeway', 'Garden', 'Gardens', 'Gateway', 'Glen', 'Glens', 'Green', 'Greens', 'Grove', 'Groves', 'Harbor', 'Harbors', 'Haven', 'Heights', 'Highway', 'Hill', 'Hills', 'Hollow', 'Inlet', 'Inlet', 'Island', 'Island', 'Islands', 'Islands', 'Isle', 'Isle', 'Junction', 'Junctions', 'Key', 'Keys', 'Knoll', 'Knolls', 'Lake', 'Lakes', 'Land', 'Landing', 'Lane', 'Light', 'Lights', 'Loaf', 'Lock', 'Locks', 'Locks', 'Lodge', 'Lodge', 'Loop', 'Mall', 'Manor', 'Manors', 'Meadow', 'Meadows', 'Mews', 'Mill', 'Mills', 'Mission', 'Mission', 'Motorway', 'Mount', 'Mountain', 'Mountain', 'Mountains', 'Mountains', 'Neck', 'Orchard', 'Oval', 'Overpass', 'Park', 'Parks', 'Parkway', 'Parkways', 'Pass', 'Passage', 'Path', 'Pike', 'Pine', 'Pines', 'Place', 'Plain', 'Plains', 'Plains', 'Plaza', 'Plaza', 'Point', 'Points', 'Port', 'Port', 'Ports', 'Ports', 'Prairie', 'Prairie', 'Radial', 'Ramp', 'Ranch', 'Rapid', 'Rapids', 'Rest', 'Ridge', 'Ridges', 'River', 'Road', 'Road', 'Roads', 'Roads', 'Route', 'Row', 'Rue', 'Run', 'Shoal', 'Shoals', 'Shore', 'Shores', 'Skyway', 'Spring', 'Springs', 'Springs', 'Spur', 'Spurs', 'Square', 'Square', 'Squares', 'Squares', 'Station', 'Station', 'Stravenue', 'Stravenue', 'Stream', 'Stream', 'Street', 'Street', 'Streets', 'Summit', 'Summit', 'Terrace', 'Throughway', 'Trace', 'Track', 'Trafficway', 'Trail', 'Trail', 'Tunnel', 'Tunnel', 'Turnpike', 'Turnpike', 'Underpass', 'Union', 'Unions', 'Valley', 'Valleys', 'Via', 'Viaduct', 'View', 'Views', 'Village', 'Village', 'Villages', 'Ville', 'Vista', 'Vista', 'Walk', 'Walks', 'Wall', 'Way', 'Ways', 'Well', 'Wells',
+   12      );
+   13      protected static $postcode = array('####');
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/fr_FR/Text.php:
+ 15189  
+ 15190      Creating the works from public domain print editions means that no
+ 15191:     one owns a United States copyright in these works, so the Foundation
+ 15192:     (and you!) can copy and distribute it in the United States without
+ 15193      permission and without paying copyright royalties.  Special rules,
+ 15194      set forth in the General Terms of Use part of this license, apply to
+ .....
+ 15244      or PGLAF), owns a compilation copyright in the collection of Project
+ 15245      Gutenberg-tm electronic works.  Nearly all the individual works in the
+ 15246:     collection are in the public domain in the United States.  If an
+ 15247:     individual work is in the public domain in the United States and you are
+ 15248:     located in the United States, we do not claim a right to prevent you from
+ 15249      copying, distributing, performing, displaying or creating derivative
+ 15250      works based on the work as long as all references to Project Gutenberg
+ .....
+ 15259      1.D.  The copyright laws of the place where you are located also govern
+ 15260      what you can do with this work.  Copyright laws in most countries are in
+ 15261:     a constant state of change.  If you are outside the United States, check
+ 15262      the laws of your country in addition to the terms of this agreement
+ 15263      before downloading, copying, displaying, performing, distributing or
+ .....
+ 15265      Gutenberg-tm work.  The Foundation makes no representations concerning
+ 15266      the copyright status of any work in any country outside the United
+ 15267:     States.
+ 15268  
+ 15269      1.E.  Unless you have removed all references to Project Gutenberg:
+ .....
+ 15284      from the public domain (does not contain a notice indicating that it is
+ 15285      posted with permission of the copyright holder), the work can be copied
+ 15286:     and distributed to anyone in the United States without paying any fees
+ 15287      or charges.  If you are redistributing or providing access to a work
+ 15288      with the phrase "Project Gutenberg" associated with or appearing on the
+ .....
+ 15410      WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+ 15411  
+ 15412:     1.F.5.  Some states do not allow disclaimers of certain implied
+ 15413      warranties or the exclusion or limitation of certain types of damages.
+ 15414      If any disclaimer or limitation set forth in this agreement violates the
+ .....
+ 15485  
+ 15486      The Foundation is committed to complying with the laws regulating
+ 15487:     charities and charitable donations in all 50 states of the United
+ 15488:     States.  Compliance requirements are not uniform and it takes a
+ 15489      considerable effort, much paperwork and many fees to meet and keep up
+ 15490      with these requirements.  We do not solicit donations in locations
+ .....
+ 15493      particular state visit http://pglaf.org
+ 15494  
+ 15495:     While we cannot and do not solicit contributions from states where we
+ 15496      have not met the solicitation requirements, we know of no prohibition
+ 15497:     against accepting unsolicited donations from donors in such states who
+ 15498      approach us with offers to donate.
+ 15499  
+ 15500      International donations are gratefully accepted, but we cannot make
+ 15501      any statements concerning tax treatment of donations received from
+ 15502:     outside the United States.  U.S. laws alone swamp our small staff.
+ 15503  
+ 15504      Please check the Project Gutenberg Web pages for current donation
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/id_ID/Address.php:
+  143          'Kepulauan Solomon',
+  144  
+  145:         // http://id.wikipedia.org/wiki/United_States_Minor_Outlying_Islands
+  146          'Kepulauan Terluar Kecil Amerika Serikat',
+  147  
+  148          'Kepulauan Turks dan Caicos',
+  149  
+  150:         // http://id.wikipedia.org/wiki/United_States_Virgin_Islands
+  151          'Kepulauan Virgin Amerika Serikat',
+  152  
+  ...
+  216          'Venezuela', 'Vietnam', 'Wallis dan Futuna', 'Wilayah Palestina',
+  217  
+  218:         // http://id.wikipedia.org/wiki/United_States_Virgin_Islands
+  219          'Wilayah Samudra Hindia Britania',
+  220  
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/it_IT/Address.php:
+   39          'San Bartolomeo', 'Sant\'Elena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Arabia Saudita', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovenia', 'Isole Solomon', 'Somalia', 'Sud Africa', 'Georgia del sud e South Sandwich Islands', 'Spagna', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Svezia', 'Svizzera', 'Siria',
+   40          'Taiwan', 'Tajikistan', 'Tanzania', 'Tailandia', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad e Tobago', 'Tunisia', 'Turchia', 'Turkmenistan', 'Isole di Turks and Caicos', 'Tuvalu',
+   41:         'Uganda', 'Ucraina', 'Emirati Arabi Uniti', 'Regno Unito', 'Stati Uniti d\'America', 'United States Minor Outlying Islands', 'Isole Vergini Statunitensi', 'Uruguay', 'Uzbekistan',
+   42          'Vanuatu', 'Venezuela', 'Vietnam',
+   43          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/ms_MY/Address.php:
+  400      
+  401      /**
+  402:      * @link https://en.wikipedia.org/wiki/States_and_federal_territories_of_Malaysia
+  403       */
+  404:     protected static $states = array(
+  405          'johor' => array(
+  406              'Johor Darul Ta\'zim',
+  ...
+  598       * 
+  599       * @example '55100'
+  600:      * @link https://en.wikipedia.org/wiki/Postal_codes_in_Malaysia#States
+  601       * 
+  602       * @param null|string $state 'state' or null
+  ...
+  673      public function townState()
+  674      {
+  675:         $state = static::randomElement(array_keys(static::$states));
+  676          $postcode = static::postcode($state);
+  677          $town = static::randomElement(static::$towns[$state]);
+  678:         $state = static::randomElement(static::$states[$state]);
+  679  
+  680          return $postcode . ' ' . $town . ', ' . $state;
+  ...
+  703      public function state()
+  704      {
+  705:         $state = static::randomElement(array_keys(static::$states));
+  706:         return static::randomElement(static::$states[$state]);
+  707      }
+  708  }
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/ne_NP/Address.php:
+   84          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+   85          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+   86:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+   87          'Vanuatu', 'Venezuela', 'Vietnam',
+   88          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/pl_PL/Text.php:
+ 2645      Virginia, Wisconsin, and Wyoming.
+ 2646  
+ 2647:     We have filed in all 50 states now, but these are the only ones
+ 2648      that have responded.
+ 2649  
+ 2650:     As the requirements for other states are met, additions to this list
+ 2651:     will be made and fund raising will begin in the additional states.
+ 2652      Please feel free to ask to check the status of your state.
+ 2653  
+ ....
+ 2655  
+ 2656      We are constantly working on finishing the paperwork to legally
+ 2657:     request donations in all 50 states.  If your state is not listed and
+ 2658      you would like to know if we have added it since the list you have,
+ 2659      just ask.
+ 2660  
+ 2661:     While we cannot solicit donations from people in states where we are
+ 2662      not yet registered, we know of no prohibition against accepting
+ 2663:     donations from donors in these states who approach us with an offer to
+ 2664      donate.
+ 2665  
+ ....
+ 2683      [Employee Identification Number] 64-622154.  Donations are
+ 2684      tax-deductible to the maximum extent permitted by law.  As fund-raising
+ 2685:     requirements for other states are met, additions to this list will be
+ 2686:     made and fund-raising will begin in the additional states.
+ 2687  
+ 2688      We need your donations more than ever!
+ ....
+ 2731      is a "public domain" work distributed by Professor Michael S. Hart
+ 2732      through the Project Gutenberg Association (the "Project").
+ 2733:     Among other things, this means that no one owns a United States copyright
+ 2734      on or for this work, so the Project (and you!) can copy and
+ 2735:     distribute it in the United States without permission and
+ 2736      without paying copyright royalties. Special rules, set forth
+ 2737      below, apply if you wish to copy and distribute this eBook
+ ....
+ 2778      PARTICULAR PURPOSE.
+ 2779  
+ 2780:     Some states do not allow disclaimers of implied warranties or
+ 2781      the exclusion or limitation of consequential damages, so the
+ 2782      above disclaimers and exclusions may not apply to you, and you
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/sk_SK/Address.php:
+  298      protected static $buildingNumber = array('#####', '####', '###');
+  299      protected static $streetSuffix = array(
+  300:         'Alley','Avenue','Branch','Bridge','Brook','Brooks','Burg','Burgs','Bypass','Camp','Canyon','Cape','Causeway','Center','Centers','Circle','Circles','Cliff','Cliffs','Club','Common','Corner','Corners','Course','Court','Courts','Cove','Coves','Creek','Crescent','Crest','Crossing','Crossroad','Curve','Dale','Dam','Divide','Drive','Drive','Drives','Estate','Estates','Expressway','Extension','Extensions','Fall','Falls','Ferry','Field','Fields','Flat','Flats','Ford','Fords','Forest','Forge','Forges','Fork','Forks','Fort','Freeway','Garden','Gardens','Gateway','Glen','Glens','Green','Greens','Grove','Groves','Harbor','Harbors','Haven','Heights','Highway','Hill','Hills','Hollow','Inlet','Inlet','Island','Island','Islands','Islands','Isle','Isle','Junction','Junctions','Key','Keys','Knoll','Knolls','Lake','Lakes','Land','Landing','Lane','Light','Lights','Loaf','Lock','Locks','Locks','Lodge','Lodge','Loop','Mall','Manor','Manors','Meadow','Meadows','Mews','Mill','Mills','Mission','Mission','Motorway','Mount','Mountain','Mountain','Mountains','Mountains','Neck','Orchard','Oval','Overpass','Park','Parks','Parkway','Parkways','Pass','Passage','Path','Pike','Pine','Pines','Place','Plain','Plains','Plains','Plaza','Plaza','Point','Points','Port','Port','Ports','Ports','Prairie','Prairie','Radial','Ramp','Ranch','Rapid','Rapids','Rest','Ridge','Ridges','River','Road','Road','Roads','Roads','Route','Row','Rue','Run','Shoal','Shoals','Shore','Shores','Skyway','Spring','Springs','Springs','Spur','Spurs','Square','Square','Squares','Squares','Station','Station','Stravenue','Stravenue','Stream','Stream','Street','Street','Streets','Summit','Summit','Terrace','Throughway','Trace','Track','Trafficway','Trail','Trail','Tunnel','Tunnel','Turnpike','Turnpike','Underpass','Union','Unions','Valley','Valleys','Via','Viaduct','View','Views','Village','Village','Villages','Ville','Vista','Vista','Walk','Walks','Wall','Way','Ways','Well','Wells'
+  301      );
+  302      protected static $postcode = array('### ##');
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/vi_VN/Address.php:
+  110          'Saint Barthelemy', 'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin', 'Saint Pierre and Miquelon', 'Saint Vincent and the Grenadines', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia (Slovak Republic)', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Georgia and the South Sandwich Islands', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard & Jan Mayen Islands', 'Swaziland', 'Sweden', 'Switzerland', 'Syrian Arab Republic',
+  111          'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tokelau', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+  112:         'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'United States Minor Outlying Islands', 'United States Virgin Islands', 'Uruguay', 'Uzbekistan',
+  113          'Vanuatu', 'Venezuela', 'Vietnam',
+  114          'Wallis and Futuna', 'Western Sahara',
+
+/Applications/MAMP/htdocs/digc/vendor/fzaninotto/faker/src/Faker/Provider/zh_CN/Address.php:
+   18      );
+   19  
+   20:     protected static $states = array(
+   21          '北京市', '天津市', '河北省', '山西省',
+   22          '内蒙古自治区', '辽宁省', '吉林省',
+   ..
+  117      public function state()
+  118      {
+  119:         return static::randomElement(static::$states);
+  120      }
+  121  
+
+/Applications/MAMP/htdocs/digc/vendor/guzzlehttp/promises/src/PromiseInterface.php:
+   46       * Get the state of the promise ("pending", "rejected", or "fulfilled").
+   47       *
+   48:      * The three states can be checked against the constants defined on
+   49       * PromiseInterface: PENDING, FULFILLED, and REJECTED.
+   50       *
+
+/Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Factory.php:
+   17  
+   18      /**
+   19:      * The registered model states.
+   20       *
+   21       * @var array
+   22       */
+   23:     protected $states = [];
+   24  
+   25      /**
+   ..
+   93      public function state($class, $state, $attributes)
+   94      {
+   95:         $this->states[$class][$state] = $attributes;
+   96  
+   97          return $this;
+   ..
+  185      public function of($class, $name = 'default')
+  186      {
+  187:         return new FactoryBuilder($class, $name, $this->definitions, $this->states, $this->faker);
+  188      }
+  189  
+
+/Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Database/Eloquent/FactoryBuilder.php:
+   40  
+   41      /**
+   42:      * The model states.
+   43       *
+   44       * @var array
+   45       */
+   46:     protected $states;
+   47  
+   48      /**
+   49:      * The states to apply.
+   50       *
+   51       * @var array
+   52       */
+   53:     protected $activeStates = [];
+   54  
+   55      /**
+   ..
+   73       * @param  string  $name
+   74       * @param  array  $definitions
+   75:      * @param  array  $states
+   76       * @param  \Faker\Generator  $faker
+   77       * @return void
+   78       */
+   79:     public function __construct($class, $name, array $definitions, array $states, Faker $faker)
+   80      {
+   81          $this->name = $name;
+   82          $this->class = $class;
+   83          $this->faker = $faker;
+   84:         $this->states = $states;
+   85          $this->definitions = $definitions;
+   86      }
+   ..
+  100  
+  101      /**
+  102:      * Set the states to be applied to the model.
+  103       *
+  104:      * @param  array|mixed  $states
+  105       * @return $this
+  106       */
+  107:     public function states($states)
+  108      {
+  109:         $this->activeStates = is_array($states) ? $states : func_get_args();
+  110  
+  111          return $this;
+  ...
+  230  
+  231          return $this->expandAttributes(
+  232:             array_merge($this->applyStates($definition, $attributes), $attributes)
+  233          );
+  234      }
+  ...
+  262  
+  263      /**
+  264:      * Apply the active states to the model definition array.
+  265       *
+  266       * @param  array  $definition
+  ...
+  268       * @return array
+  269       */
+  270:     protected function applyStates(array $definition, array $attributes = [])
+  271      {
+  272:         foreach ($this->activeStates as $state) {
+  273:             if (! isset($this->states[$this->class][$state])) {
+  274                  throw new InvalidArgumentException("Unable to locate [{$state}] state for [{$this->class}].");
+  275              }
+  ...
+  293      protected function stateAttributes($state, array $attributes)
+  294      {
+  295:         $stateAttributes = $this->states[$this->class][$state];
+  296  
+  297          if (! is_callable($stateAttributes)) {
+
+/Applications/MAMP/htdocs/digc/vendor/laravel/framework/src/Illuminate/Validation/ValidationRuleParser.php:
+  230          // The format for specifying validation rules and parameters follows an
+  231          // easy {rule}:{parameters} formatting convention. For instance the
+  232:         // rule "Max:3" states that the value may only be three letters.
+  233          if (strpos($rules, ':') !== false) {
+  234              list($rules, $parameter) = explode(':', $rules, 2);
+
+/Applications/MAMP/htdocs/digc/vendor/milon/barcode/LICENSE.TXT:
+  241  
+  242    Finally, every program is threatened constantly by software patents.
+  243: States should not allow patents to restrict development and use of
+  244  software on general-purpose computers, but in those that do, we wish to
+  245  avoid the special danger that patents applied to a free program could
+
+/Applications/MAMP/htdocs/digc/vendor/milon/barcode/src/Milon/Barcode/DNS1D.php:
+ 2112       * IMB - Intelligent Mail Barcode - Onecode - USPS-B-3200
+ 2113       * (requires PHP bcmath extension)
+ 2114:      * Intelligent Mail barcode is a 65-bar code for use on mail in the United States.
+ 2115       * The fields are described as follows:<ul><li>The Barcode Identifier shall be assigned by USPS to encode the presort identification that is currently printed in human readable form on the optional endorsement line (OEL) as well as for future USPS use. This shall be two digits, with the second digit in the range of 0–4. The allowable encoding ranges shall be 00–04, 10–14, 20–24, 30–34, 40–44, 50–54, 60–64, 70–74, 80–84, and 90–94.</li><li>The Service Type Identifier shall be assigned by USPS for any combination of services requested on the mailpiece. The allowable encoding range shall be 000http://it2.php.net/manual/en/function.dechex.php–999. Each 3-digit value shall correspond to a particular mail class with a particular combination of service(s). Each service program, such as OneCode Confirm and OneCode ACS, shall provide the list of Service Type Identifier values.</li><li>The Mailer or Customer Identifier shall be assigned by USPS as a unique, 6 or 9 digit number that identifies a business entity. The allowable encoding range for the 6 digit Mailer ID shall be 000000- 899999, while the allowable encoding range for the 9 digit Mailer ID shall be 900000000-999999999.</li><li>The Serial or Sequence Number shall be assigned by the mailer for uniquely identifying and tracking mailpieces. The allowable encoding range shall be 000000000–999999999 when used with a 6 digit Mailer ID and 000000-999999 when used with a 9 digit Mailer ID. e. The Delivery Point ZIP Code shall be assigned by the mailer for routing the mailpiece. This shall replace POSTNET for routing the mailpiece to its final delivery point. The length may be 0, 5, 9, or 11 digits. The allowable encoding ranges shall be no ZIP Code, 00000–99999,  000000000–999999999, and 00000000000–99999999999.</li></ul>
+ 2116       * @param $code (string) code to print, separate the ZIP (routing code) from the rest using a minus char '-' (BarcodeID_ServiceTypeID_MailerID_SerialNumber-RoutingCode)
+
+/Applications/MAMP/htdocs/digc/vendor/mtdowling/cron-expression/src/Cron/DayOfMonthField.php:
+   59      public function isSatisfiedBy(DateTime $date, $value)
+   60      {
+   61:         // ? states that the field value is to be skipped
+   62          if ($value == '?') {
+   63              return true;
+
+/Applications/MAMP/htdocs/digc/vendor/nikic/php-parser/grammar/parser.template:
+   34  
+   35      protected $YY2TBLSTATE = #(YY2TBLSTATE);
+   36:     protected $numNonLeafStates = #(YYNLSTATES);
+   37  
+   38      protected $symbolToName = array(
+
+/Applications/MAMP/htdocs/digc/vendor/nikic/php-parser/lib/PhpParser/Parser/Php5.php:
+   28  
+   29      protected $YY2TBLSTATE = 403;
+   30:     protected $numNonLeafStates = 672;
+   31  
+   32      protected $symbolToName = array(
+
+/Applications/MAMP/htdocs/digc/vendor/nikic/php-parser/lib/PhpParser/Parser/Php7.php:
+   28  
+   29      protected $YY2TBLSTATE = 336;
+   30:     protected $numNonLeafStates = 581;
+   31  
+   32      protected $symbolToName = array(
+
+/Applications/MAMP/htdocs/digc/vendor/nikic/php-parser/lib/PhpParser/ParserAbstract.php:
+   48  
+   49      protected $YY2TBLSTATE;
+   50:     /** @var int Number of non-leaf states */
+   51:     protected $numNonLeafStates;
+   52  
+   53      /** @var int[] Map of lexer tokens to internal symbols */
+   ..
+   58      protected $productions;
+   59  
+   60:     /** @var int[] Map of states to a displacement into the $action table. The corresponding action for this
+   61       *             state/symbol pair is $action[$actionBase[$state] + $symbol]. If $actionBase[$state] is 0, the
+   62                     action is defaulted, i.e. $actionDefault[$state] should be used instead. */
+   ..
+   67       *             then the action is defaulted, i.e. $actionDefault[$state] should be used instead. */
+   68      protected $actionCheck;
+   69:     /** @var int[] Map of states to their default action */
+   70      protected $actionDefault;
+   71      /** @var callable[] Semantic action callbacks */
+   ..
+   75       *             non-terminal/state pair is $goto[$gotoBase[$nonTerminal] + $state] (unless defaulted) */
+   76      protected $gotoBase;
+   77:     /** @var int[] Table of states to goto after reduction. Indexed according to $gotoBase comment. */
+   78      protected $goto;
+   79      /** @var int[] Table indexed analogously to $goto. If $gotoCheck[$gotoBase[$nonTerminal] + $state] != $nonTerminal
+   ..
+  182          $this->endAttributeStack = [$endAttributes];
+  183  
+  184:         // Start off in the initial state and keep a stack of previous states
+  185          $state = 0;
+  186:         $stateStack = [$state];
+  187  
+  188          // Semantic value stack (contains values of tokens and semantic action results)
+  ...
+  231                  if ((($idx >= 0 && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $symbol)
+  232                       || ($state < $this->YY2TBLSTATE
+  233:                          && ($idx = $this->actionBase[$state + $this->numNonLeafStates] + $symbol) >= 0
+  234                           && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $symbol))
+  235                      && ($action = $this->action[$idx]) !== $this->defaultAction) {
+  236                      /*
+  237:                      * >= numNonLeafStates: shift and reduce
+  238                       * > 0: shift
+  239                       * = 0: accept
+  ...
+  246  
+  247                          ++$stackPos;
+  248:                         $stateStack[$stackPos] = $state = $action;
+  249                          $this->semStack[$stackPos] = $tokenValue;
+  250                          $this->startAttributeStack[$stackPos] = $startAttributes;
+  ...
+  257                          }
+  258  
+  259:                         if ($action < $this->numNonLeafStates) {
+  260                              continue;
+  261                          }
+  262  
+  263:                         /* $yyn >= numNonLeafStates means shift-and-reduce */
+  264:                         $rule = $action - $this->numNonLeafStates;
+  265                      } else {
+  266                          $rule = -$action;
+  ...
+  296                      $stackPos -= $this->ruleToLength[$rule];
+  297                      $nonTerminal = $this->ruleToNonTerminal[$rule];
+  298:                     $idx = $this->gotoBase[$nonTerminal] + $stateStack[$stackPos];
+  299                      if ($idx >= 0 && $idx < $this->gotoTableSize && $this->gotoCheck[$idx] === $nonTerminal) {
+  300                          $state = $this->goto[$idx];
+  ...
+  304  
+  305                      ++$stackPos;
+  306:                     $stateStack[$stackPos]     = $state;
+  307                      $this->semStack[$stackPos] = $this->semValue;
+  308                      $this->endAttributeStack[$stackPos] = $lastEndAttributes;
+  ...
+  323                                      && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $this->errorSymbol)
+  324                                  || ($state < $this->YY2TBLSTATE
+  325:                                     && ($idx = $this->actionBase[$state + $this->numNonLeafStates] + $this->errorSymbol) >= 0
+  326                                      && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $this->errorSymbol)
+  327                              ) || ($action = $this->action[$idx]) === $this->defaultAction) { // Not totally sure about this
+  ...
+  330                                      return null;
+  331                                  }
+  332:                                 $state = $stateStack[--$stackPos];
+  333                                  //$this->tracePop($state);
+  334                              }
+  ...
+  336                              //$this->traceShift($this->errorSymbol);
+  337                              ++$stackPos;
+  338:                             $stateStack[$stackPos] = $state = $action;
+  339  
+  340                              // We treat the error symbol as being empty, so we reset the end attributes
+  ...
+  356                  }
+  357  
+  358:                 if ($state < $this->numNonLeafStates) {
+  359                      break;
+  360                  }
+  361  
+  362:                 /* >= numNonLeafStates means shift-and-reduce */
+  363:                 $rule = $state - $this->numNonLeafStates;
+  364              }
+  365          }
+  ...
+  404              if ($idx >= 0 && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $symbol
+  405                  || $state < $this->YY2TBLSTATE
+  406:                 && ($idx = $this->actionBase[$state + $this->numNonLeafStates] + $symbol) >= 0
+  407                  && $idx < $this->actionTableSize && $this->actionCheck[$idx] === $symbol
+  408              ) {
+
+/Applications/MAMP/htdocs/digc/vendor/pclzip/pclzip/gnu-lgpl.txt:
+  248  contains portions of the Library), rather than a "work that uses the
+  249  library".  The executable is therefore covered by this License.
+  250: Section 6 states terms for distribution of such executables.
+  251  
+  252    When a "work that uses the Library" uses material from a header file
+
+/Applications/MAMP/htdocs/digc/vendor/phenx/php-font-lib/LICENSE:
+  248  contains portions of the Library), rather than a "work that uses the
+  249  library".  The executable is therefore covered by this License.
+  250: Section 6 states terms for distribution of such executables.
+  251  
+  252    When a "work that uses the Library" uses material from a header file
+
+/Applications/MAMP/htdocs/digc/vendor/phenx/php-svg-lib/COPYING.GPL:
+   60  
+   61    Finally, every program is threatened constantly by software patents.
+   62: States should not allow patents to restrict development and use of
+   63  software on general-purpose computers, but in those that do, we wish to
+   64  avoid the special danger that patents applied to a free program could
+
+/Applications/MAMP/htdocs/digc/vendor/phenx/php-svg-lib/src/Svg/Surface/CPdf.php:
+   87       * @var integer Number of graphic state resources used
+   88       */
+   89:     private $numStates = 0;
+   90  
+   91      /**
+   ..
+  124       * it is used to temporarily change to another state, the change back to what it was before
+  125       */
+  126:     public $stateStack = array();
+  127  
+  128      /**
+  129       * @var integer Number of elements within the state stack
+  130       */
+  131:     public $nStateStack = 0;
+  132  
+  133      /**
+  ...
+  597  
+  598              case 'extGState':
+  599:                 $o['info']['extGStates'][] = array('objNum' => $options['objNum'], 'stateNum' => $options['stateNum']);
+  600                  break;
+  601  
+  ...
+  615                      if ((isset($o['info']['fonts']) && count($o['info']['fonts'])) ||
+  616                          isset($o['info']['procset']) ||
+  617:                         (isset($o['info']['extGStates']) && count($o['info']['extGStates']))
+  618                      ) {
+  619                          $res .= "\n/Resources <<";
+  ...
+  639                          }
+  640  
+  641:                         if (isset($o['info']['extGStates']) && count($o['info']['extGStates'])) {
+  642                              $res .= "\n/ExtGState << ";
+  643:                             foreach ($o['info']['extGStates'] as $gstate) {
+  644                                  $res .= "\n/GS" . $gstate['stateNum'] . " " . $gstate['objNum'] . " 0 R";
+  645                              }
+  ...
+ 1725  
+ 1726                  // Tell the pages about the new resource
+ 1727:                 $this->numStates++;
+ 1728:                 $this->o_pages($this->currentNode, 'extGState', array("objNum" => $id, "stateNum" => $this->numStates));
+ 1729                  break;
+ 1730  
+ ....
+ 2799      {
+ 2800          // Create a new graphics state object
+ 2801:         // FIXME: should actually keep track of states that have already been created...
+ 2802          $this->numObj++;
+ 2803          $this->o_extGState($this->numObj, 'new', $parameters);
+ 2804:         $this->addContent("\n/GS$this->numStates gs");
+ 2805      }
+ 2806  
+ ....
+ 3235          // then on the new page, re-open them with the right setings
+ 3236  
+ 3237:         if ($this->nStateStack) {
+ 3238:             for ($i = $this->nStateStack; $i >= 1; $i--) {
+ 3239                  $this->restoreState($i);
+ 3240              }
+ ....
+ 3254  
+ 3255          // if there is a stack saved, then put that onto the page
+ 3256:         if ($this->nStateStack) {
+ 3257:             for ($i = 1; $i <= $this->nStateStack; $i++) {
+ 3258                  $this->saveState($i);
+ 3259              }
+ ....
+ 3708              // end of the previous page, before the stack was closed down
+ 3709              // This is to get around not being able to have open 'q' across pages
+ 3710:             $opt = $this->stateStack[$pageEnd];
+ 3711              // ok to use this as stack starts numbering at 1
+ 3712              $this->setColor($opt['col'], true);
+ ....
+ 3715              //    $this->currentLineStyle = $opt['lin'];
+ 3716          } else {
+ 3717:             $this->nStateStack++;
+ 3718:             $this->stateStack[$this->nStateStack] = array(
+ 3719                  'col' => $this->currentColor,
+ 3720                  'str' => $this->currentStrokeColor,
+ ....
+ 3732      {
+ 3733          if (!$pageEnd) {
+ 3734:             $n = $this->nStateStack;
+ 3735:             $this->currentColor = $this->stateStack[$n]['col'];
+ 3736:             $this->currentStrokeColor = $this->stateStack[$n]['str'];
+ 3737:             $this->addContent("\n" . $this->stateStack[$n]['lin']);
+ 3738:             $this->currentLineStyle = $this->stateStack[$n]['lin'];
+ 3739:             $this->stateStack[$n] = null;
+ 3740:             unset($this->stateStack[$n]);
+ 3741:             $this->nStateStack--;
+ 3742          }
+ 3743  
+
+/Applications/MAMP/htdocs/digc/vendor/phpoffice/common/COPYING:
+   60  
+   61    Finally, every program is threatened constantly by software patents.
+   62: States should not allow patents to restrict development and use of
+   63  software on general-purpose computers, but in those that do, we wish to
+   64  avoid the special danger that patents applied to a free program could
+
+/Applications/MAMP/htdocs/digc/vendor/phpoffice/phpword/COPYING:
+   60  
+   61    Finally, every program is threatened constantly by software patents.
+   62: States should not allow patents to restrict development and use of
+   63  software on general-purpose computers, but in those that do, we wish to
+   64  avoid the special danger that patents applied to a free program could
+
+/Applications/MAMP/htdocs/digc/vendor/phpunit/phpunit/src/Framework/TestCase.php:
+ 2236          }
+ 2237  
+ 2238:         $this->snapshot = $this->createGlobalStateSnapshot($this->backupGlobals === true);
+ 2239      }
+ 2240  
+ ....
+ 2247          if ($this->beStrictAboutChangesToGlobalState) {
+ 2248              try {
+ 2249:                 $this->compareGlobalStateSnapshots(
+ 2250                      $this->snapshot,
+ 2251:                     $this->createGlobalStateSnapshot($this->backupGlobals === true)
+ 2252                  );
+ 2253              } catch (RiskyTestError $rte) {
+ ....
+ 2278       * @return Snapshot
+ 2279       */
+ 2280:     private function createGlobalStateSnapshot($backupGlobals)
+ 2281      {
+ 2282          $blacklist = new Blacklist;
+ ....
+ 2325       * @throws RiskyTestError
+ 2326       */
+ 2327:     private function compareGlobalStateSnapshots(Snapshot $before, Snapshot $after)
+ 2328      {
+ 2329          $backupGlobals = $this->backupGlobals === null || $this->backupGlobals === true;
+ 2330  
+ 2331          if ($backupGlobals) {
+ 2332:             $this->compareGlobalStateSnapshotPart(
+ 2333                  $before->globalVariables(),
+ 2334                  $after->globalVariables(),
+ ....
+ 2336              );
+ 2337  
+ 2338:             $this->compareGlobalStateSnapshotPart(
+ 2339                  $before->superGlobalVariables(),
+ 2340                  $after->superGlobalVariables(),
+ ....
+ 2344  
+ 2345          if ($this->backupStaticAttributes) {
+ 2346:             $this->compareGlobalStateSnapshotPart(
+ 2347                  $before->staticAttributes(),
+ 2348                  $after->staticAttributes(),
+ ....
+ 2359       * @throws RiskyTestError
+ 2360       */
+ 2361:     private function compareGlobalStateSnapshotPart(array $before, array $after, $header)
+ 2362      {
+ 2363          if ($before != $after) {
+
+/Applications/MAMP/htdocs/digc/vendor/phpunit/phpunit/src/Framework/TestSuite.php:
+  452          );
+  453  
+  454:         $preserveGlobalState = \PHPUnit\Util\Test::getPreserveGlobalStateSettings(
+  455              $className,
+  456              $name
+
+/Applications/MAMP/htdocs/digc/vendor/phpunit/phpunit/src/Util/Test.php:
+  885       * @return ?bool
+  886       */
+  887:     public static function getPreserveGlobalStateSettings($className, $methodName)
+  888      {
+  889          return self::getBooleanAnnotationSetting(
+
+/Applications/MAMP/htdocs/digc/vendor/sabberworm/php-css-parser/Doxyfile:
+   83  # information to generate all constant output in the proper language.
+   84  # Possible values are: Afrikaans, Arabic, Armenian, Brazilian, Catalan, Chinese,
+   85: # Chinese-Traditional, Croatian, Czech, Danish, Dutch, English (United States),
+   86  # Esperanto, Farsi (Persian), Finnish, French, German, Greek, Hungarian,
+   87  # Indonesian, Italian, Japanese, Japanese-en (Japanese with English messages),
+
+/Applications/MAMP/htdocs/digc/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Signers/DomainKeySigner.php:
+  124  
+  125      /**
+  126:      * Resets internal states.
+  127       *
+  128       * @return $this
+
+/Applications/MAMP/htdocs/digc/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Signers/SMimeSigner.php:
+  168  
+  169      /**
+  170:      * Resets internal states.
+  171       *
+  172       * @return $this
+
+/Applications/MAMP/htdocs/digc/vendor/symfony/translation/Loader/PoFileLoader.php:
+   47       * msgstr[N] translated-string-case-n
+   48       *
+   49:      * The definition states:
+   50       * - white-space and comments are optional.
+   51       * - msgid "" that an empty singleline defines a header.
+
+448 matches across 84 files

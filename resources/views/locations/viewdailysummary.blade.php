@@ -1,0 +1,1 @@
+viewdailysummary.blade.php
