@@ -17,8 +17,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        $param['pageName'] = "System Login";
-        return view('auth.login', $param);
+        return view('auth.login');
     }
 
     /**

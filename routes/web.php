@@ -301,7 +301,7 @@ Route::post('/system/rbac/roles/edit', array('uses'=>'SystemController@editRole'
 
 // ACCOUNT ROUTES\\
 Route::get('/accounts/dashboards/{id?}', ['uses'=>'AccountController@dashboard', 'as'=>'accounts.dashboard', 'middleware' => ['auth', 'acl'], 'is' => 'auditor|hq-accountant|administrator|resident-pastor']);
-Route::get('/accounts/location/report/{id?}', ['uses'=>'AccountController@onelocationx', 'as'=>'accounts.locationReport', 'middleware' => ['auth', 'acl'], 'is' => 'auditor|hq-accountant|administrator']);
+Route::get('/accounts/location/report/{id?}', ['uses'=>'AccountController@onelocationx', 'as'=>'accounts.locationReport', 'middleware' => ['auth', 'acl'], 'is' => 'auditor|hq-accountant|administrator|account-officer|resident-pastor']);
 Route::get('/accounts/income/statements/{id?}', array('uses'=>'AccountController@incomestatement', 'as'=>'income.statement', 'middleware'=>['auth', 'acl'], 'is', 'administrator|auditor|hq-accountant|resident-pastor' ));
 Route::get('/accounts/income/monthly-statements/{id?}', array('uses'=>'AccountController@monthincomesummary', 'as'=>'income.locationmonthlysummary', 'middleware'=>['auth', 'acl'], 'is', 'administrator|auditor|hq-accountant|resident-pastor' ));
 Route::get('/accounts/income/monthly-statements-general/{type?}', array('uses'=>'AccountController@monthincomesummary2', 'as'=>'income.locationmonthlysummary2', 'middleware'=>['auth', 'acl'], 'is', 'administrator|auditor|hq-accountant|resident-pastor' ));

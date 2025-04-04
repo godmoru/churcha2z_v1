@@ -351,7 +351,7 @@
                           @else
                           <div class="card bg-primary text-white lighten-2">
                             <div class="pt-5 pb-2 pl-5 pr-5">
-                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are member(s) in this location</center></span>
+                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are <strong>no</strong> member(s) in this location</center></span>
                             </div>
                           </div>
                            @endif
@@ -483,7 +483,7 @@
                           @else
                           <div class="card bg-primary text-white lighten-2">
                             <div class="pt-5 pb-2 pl-5 pr-5">
-                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are pastor(s) posting or any structure(s) added alongside such posting in this location</center></span>
+                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are <strong>no</strong> pastor(s) posting or any structure(s) added alongside such posting in this location</center></span>
                             </div>
                           </div>
                            @endif
@@ -574,7 +574,7 @@
                            @else
                           <div class="card bg-primary text-white lighten-2">
                             <div class="pt-5 pb-2 pl-5 pr-5">
-                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are convert(s) in this location</center></span>
+                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are <strong>no</strong> convert(s) in this location</center></span>
                             </div>
                           </div>
                            @endif
@@ -637,7 +637,7 @@
                           @else
                           <div class="card bg-primary text-white lighten-2">
                             <div class="pt-5 pb-2 pl-5 pr-5">
-                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are homehurch/cell(s) in this location</center></span>
+                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are <strong>no</strong> homehurch/cell(s) in this location</center></span>
                             </div>
                           </div>
                            @endif
@@ -903,7 +903,7 @@
                           @else
                           <div class="card bg-primary text-white lighten-2">
                             <div class="pt-5 pb-2 pl-5 pr-5">
-                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are homehurch/cell(s) in this location</center></span>
+                                <span class="s-48 font-weight-lighter text-primary text-center"><center>There are <strong>no</strong> homehurch/cell(s) in this location</center></span>
                             </div>
                           </div>
                            @endif

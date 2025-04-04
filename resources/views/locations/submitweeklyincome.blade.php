@@ -82,30 +82,30 @@
                                 <thead>
                                     <tr>
                                         <th style="text-align: center; text-transform: uppercase;">Income Heading</th>
-                                        <th style="text-align: center; text-transform: uppercase;">Cash</th>
-                                        <th style="text-align: center; text-transform: uppercase;">POS/Transfer</th>
-                                        <th style="text-align: center; text-transform: uppercase;">Cheques</th>
-                                        <th style="text-align: center; text-transform: uppercase;">Total</th> 
+                                        <th style="text-align: center; text-transform: uppercase;" width="20%">Cash</th>
+                                        <th style="text-align: center; text-transform: uppercase;" width="10%">POS/Transfer</th>
+                                        <th style="text-align: center; text-transform: uppercase;" width="20%">Cheques</th>
+                                        <th style="text-align: center; text-transform: uppercase;"width="50%">Total</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($sources as $isource)
-                                    <input class="total-ignore" type="hidden" name="iSourceId[]" value="{{$isource->id}}">
+                                   @foreach($sources as $isource)
                                     <tr>
-                                        <td width="23%">{{$isource->name}}</td>
-                                        <td align="center">
-                                            <input type="number" class="form-control form-control-sm add cash" name="cash[]" id="cash" value="0" align="center" style="text-align: center; " onchange="sumOffering(); sumup();" onkeyup="sumOffering();" />
-                                        </td>
-                                        <td><input type="number" class="form-control form-control-sm add pos" name="pos[]" id="pos" value="0" align="center" style="text-align: center; " onchange="sumOffering(); sumup();" /></td>
-                                        <td><input type="number" class="form-control form-control-sm add cheques" name="cheques[]" id="cheques" value="0" align="center" style="text-align: center; " onchange="sumOffering(); sumup();" /></td>
-                                        <td style="text-align: center; text-transform: uppercase; font-size: 17px;" width="5%" colspan=""> &#8358; <span id="sumOffering"></span></td>
-                                    </tr>
-                                    @endforeach
-                                <tr>
+                                  <td width="23%">{{$isource->name}}</td>
+                                  <td align="center">
+                                    <input type="number" class="form-control form-control-sm add cash" name="cash[]" id="cash" value="0" align="center" style="text-align: center; " />
+                                  </td>
+                                  <td><input type="number" class="form-control form-control-sm add pos" name="pos[]" id="pos" value="0" align="center" style="text-align: center; " /></td>
+                                  <td><input type="number" class="form-control form-control-sm add cheques" name="cheques[]" id="cheques" value="0" align="center" style="text-align: center; " /></td>
+                                  <td style="text-align: right; text-transform: uppercase; font-size: 17px;" width="5%">
+                                    &#8358; <span class="rowOffering">0.00</span> <!-- Row total for offerings -->
+                                  </td>
+                                </tr>
+                                @endforeach
                                 <td colspan="4">Grand Total</td>
-                                <td align="center">
+                                <td align="right">
                                     <div class="form-group form-float form-group-sm text-bolder h3">
-                                        <b>&#8358; <span id="grandT"></span></b>
+                                        <b>&#8358; <span id="grandT">0.00</span></b>
                                     </div>
                                 </td>
                             </tr>
@@ -231,121 +231,166 @@
     <!-- Page Script  -->
 
 
+// <script type="text/javascript">
+
+//   function sumup() {
+//     $("#income").on('input', '.add', function () {
+//      var GTotal = 0;
+//      $("#income .add ").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+
+//     $("#income").on('input', '.add', function () {
+//      var GTotal = 0;
+//      $("#income .add ").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+
+//     $("#income").on('input', '.add', function () {
+//      var GTotal = 0;
+//      $("#income .add ").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+
+//   function sumOffering() {
+//     $("#income").on('input', '.offerings', function () {
+//      var GTotal = 0;
+//      $("#income .offerings").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumOffering").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+
+//   function sumTithe() {
+//     $("#income").on('input', '.tithes', function () {
+//      var GTotal = 0;
+//      $("#income .tithes").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumTithe").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+//   function sumProjOff() {
+//     $("#income").on('input', '.project', function () {
+//      var GTotal = 0;
+//      $("#income .project").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumProjOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+//   function sumSacOff() {
+//     $("#income").on('input', '.sacrifice', function () {
+//      var GTotal = 0;
+//      $("#income .sacrifice").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumSacOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+
+//   function sumOtherOff() {
+//     $("#income").on('input', '.others', function () {
+//      var GTotal = 0;
+//      $("#income .others").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumOtherOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+
+//   function sumcol() {
+//       $("#income").on('input', '.add', function () {
+//      var GTotal = 0;
+//      $("#income .add").each(function () {
+//          var total = $(this).val();
+//          if ($.isNumeric(total)) {
+//             GTotal += parseFloat(total);
+//             }   
+//           });
+//             $("#sumOtherOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+//       });
+//   }
+
+
+
+// </script>
+
 <script type="text/javascript">
+  // Function to update the grand total
+  function sumup() {
+    var GTotal = 0;
 
-   function sumup() {
+    // Iterate over each input with class .add (cash, pos, cheques)
+    $("#income .add").each(function () {
+      var total = $(this).val();
+      if ($.isNumeric(total)) {
+        GTotal += parseFloat(total); // Add valid numeric values to the grand total
+      }
+    });
+
+    // Display the grand total
+    $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+  }
+
+  // Function to sum offerings in a row
+  function sumOffering(row) {
+    var rowTotal = 0;
+
+    // Iterate through all inputs in the row (e.g., .cash, .pos, .cheques)
+    row.find('.add').each(function () {
+      var total = $(this).val();
+      if ($.isNumeric(total)) {
+        rowTotal += parseFloat(total); // Sum valid numeric values for the row
+      }
+    });
+
+    // Update the row total display (in the span inside the row)
+    row.find('.rowOffering').text(rowTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+    sumup(); // Recalculate the grand total after row total is updated
+  }
+
+  // Event listener for changes in input fields
+  $(document).ready(function () {
+    // Bind input events to all rows
     $("#income").on('input', '.add', function () {
-     var GTotal = 0;
-     $("#income .add ").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-
-    $("#income").on('input', '.add', function () {
-     var GTotal = 0;
-     $("#income .add ").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-
-    $("#income").on('input', '.add', function () {
-     var GTotal = 0;
-     $("#income .add ").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#grandT").text(GTotal.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-
-  function sumOffering() {
-    $("#income").on('input', '.offerings', function () {
-     var GTotal = 0;
-     $("#income .offerings").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumOffering").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-
-  function sumTithe() {
-    $("#income").on('input', '.tithes', function () {
-     var GTotal = 0;
-     $("#income .tithes").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumTithe").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-  function sumProjOff() {
-    $("#income").on('input', '.project', function () {
-     var GTotal = 0;
-     $("#income .project").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumProjOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-  function sumSacOff() {
-    $("#income").on('input', '.sacrifice', function () {
-     var GTotal = 0;
-     $("#income .sacrifice").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumSacOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-
-  function sumOtherOff() {
-    $("#income").on('input', '.others', function () {
-     var GTotal = 0;
-     $("#income .others").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumOtherOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-
-  function sumcol() {
-      $("#income").on('input', '.add', function () {
-     var GTotal = 0;
-     $("#income .add").each(function () {
-         var total = $(this).val();
-         if ($.isNumeric(total)) {
-            GTotal += parseFloat(total);
-            }   
-          });
-            $("#sumOtherOff").text(GTotal.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-      });
-  }
-
-
-
+      var row = $(this).closest('tr'); // Find the row containing the changed input
+      sumOffering(row); // Update the row's offering total
+    });
+  });
 </script>
+
 
 @endsection

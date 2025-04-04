@@ -60,6 +60,7 @@ class AccountController extends Controller
             ,7 => "JULY",8 => "AUGUST",9 => "SEPTEMBER",10 => "OCTOBER",11 => "NOVEMBER",12 => "DECEMBER"];
         $param['pageName'] = $param['location']->loc_name. " Financial Report";
         $param['iRSource'] = \App\IncomeReportSource::all();
+        +
         $param['capexp'] = \App\ExpenditureType::where('expenditure_category_id', 1)->get();
         $param['recexp'] = \App\ExpenditureType::where('expenditure_category_id', 2)->get();
         return view('accounts.onelocation', $param);
@@ -236,7 +237,8 @@ class AccountController extends Controller
     public function getYcummulativesummary()
     {
         $sData = Input::all();
-        $month = '-'.(int) date('m') + '1'.'months';
+        // $month = '-'.(int) date('m') + '1'.'months';
+        $month = date('Y-m', strtotime('+1 month'));
         $dt = \Carbon\Carbon::create($sData['year']);
         $dt->firstOfMonth();
         $dt->modify($month);
@@ -479,7 +481,7 @@ class AccountController extends Controller
 		                 	'year' => \Carbon\Carbon::parse($inps['report_date'])->format("Y"),
 		                 	'month' => \Carbon\Carbon::parse($inps['report_date'])->format("m"),
 		                 	'expenditure_type_id' => $v,
-		                 	'expenditure_category_id' => is_array($inps['cap_id']) ? $inps['cap_id'][$key] : $inps['cap_id'],
+		                 	'expenditure_cat_id' => is_array($inps['cap_id']) ? $inps['cap_id'][$key] : $inps['cap_id'],
 		                 	'amount' => $inps['amount'][$key],
 		                 	'status' => 1,
 		                ];

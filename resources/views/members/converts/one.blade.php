@@ -87,9 +87,9 @@
                               @endrole
                               <!-- <li><a class="nav-link" id="v-pills-attendance-tab" data-toggle="pill" href="#v-pills-attendance" role="tab" aria-controls="v-pills-attendance" aria-selected="false"><i class="icon icon-gift"></i>Welfare History</a></li> -->
 
-                              <li>
-                                  <a class="nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline" aria-selected="false"><i class="icon icon-agenda"></i>Timeline</a>
-                              </li>
+                              <!--<li>-->
+                              <!--    <a class="nav-link" id="v-pills-timeline-tab" data-toggle="pill" href="#v-pills-timeline" role="tab" aria-controls="v-pills-timeline" aria-selected="false"><i class="icon icon-agenda"></i>Timeline</a>-->
+                              <!--</li>-->
                               <li>
                                   <a class="nav-link" id="v-pills-update-location-tab" data-toggle="pill" href="#v-pills-update-location" role="tab" aria-controls="v-pills-update-location" aria-selected="false"><i class="icon icon-cog"></i>Edit Info</a>
                               </li>
@@ -213,6 +213,8 @@
 
                               <div class="tab-pane fade" id="v-pills-class-history" role="tabpanel" aria-labelledby="v-pills-class-history-tab">
                                    <div class="row">
+                                       
+                                       @if($convert->getFClassAttendance->count() > 1)
                                       <table id="example2" class="table table-bordered table-hover data-tables" data-options='{ "paging": false; "searching":false}'>
                                           <thead>
                                             <tr>
@@ -230,16 +232,22 @@
                                                 <tr class="odd gradeX">
                                                     @foreach($convert->getFClassAttendance as  $count => $fclassAtt)
                                                         <td>{{ ++$count }}</td>  
-                                                        <td>{{ $fclassAtt->class_1_status }}</td>
-                                                        <td>{{ $fclassAtt->class_2_status }}</td>
-                                                        <td>{{ $fclassAtt->class_3_status }}</td>
-                                                        <td>{{ $fclassAtt->class_4_status }}</td>
-                                                        <td>{{ $fclassAtt->class_5_status }}</td>
-                                                        <td>{{ $fclassAtt->class_6_status }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 1 ? 'Present' : 'Absent' }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 2 ? 'Present' : 'Absent' }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 3 ? 'Present' : 'Absent' }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 4 ? 'Present' : 'Absent' }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 5 ? 'Present' : 'Absent' }}</td>
+                                                        <td>{{ $fclassAtt->class_1_status == 6 ? 'Present' : 'Absent' }}</td>
                                                     </tr>
                                                   @endforeach
                                             </tbody>
-                                      </table>   
+                                      </table>
+                                      @else
+                                        <div class="jumbotron" style="height: 60px;">
+                                          <h4 class="text-uppercase text-center"> This convert has not been enrolled in Foundation class yet. Thank you.</h4>
+                                        </div>
+                                        @endif
+                                      
 
                                    </div>
                                </div>

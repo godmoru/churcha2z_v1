@@ -14,8 +14,7 @@ trait SendsPasswordResetEmails
      */
     public function showLinkRequestForm()
     {
-        $param['pageName'] = "Password Resset Link";
-        return view('auth.passwords.email', $param);
+        return view('auth.passwords.email');
     }
 
     /**

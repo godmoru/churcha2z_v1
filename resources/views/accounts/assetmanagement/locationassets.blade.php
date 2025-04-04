@@ -28,7 +28,7 @@
                             <tr class="odd gradeX">
                             @foreach($assets as $count => $asset)
                                 <td>{{ ++$count }}</td>  
-                                <td><a href="{{route('classes.one', \Crypt::encrypt(1)) }}"> <b>{{ $asset->name }}</b></a></td>
+                                <td><a href="#"> <b>{{ $asset->name }}</b></a></td>
                                 <td align="">{{ $asset->type->name }}</td>
                                 <td align="">{{ $asset->model }}</td>
                                 <td align="">{{ $asset->serial_no }}</td>

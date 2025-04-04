@@ -2,7 +2,7 @@
 
 @section('content')
 
-<header class="white pt-3 relative shadow"">
+<header class="white pt-3 relative shadow">
     <div class="container-fluid">
         <div class="row p-t-b-12 col-md-12 col-lg-12 ">
             <div class="col-md-12">
@@ -44,7 +44,7 @@
                                             @foreach($locations as $count => $locs)
                                                 <td>{{ ++$count }}</td>  
                                                 <td><a href="{{route('locations.one', \Crypt::encrypt($locs->id)) }}"> <b>{{ $locs->loc_name }}</b></a></td>
-                                                <td>{{ isset($locs->loc_state) ? $locs->loc_state->state : "Foreign" }} - {{isset($loc->country) ? $loc->country->name : "Undefined"}}</td>
+                                                <td>{{ isset($locs->loc_state) ? $locs->loc_state->state : "Foreign" }} - {{isset($locs->country) ? $locs->country->name : "Undefined"}}</td>
                                                 <td>{{ isset($locs->get_loc_pst) ? $locs->get_loc_pst->surname.' '.$locs->get_loc_pst->othernames : " Not set"}}</td>
                                                 <td>{{ $locs->loc_email }}</td>
                                                 <td>{{ $locs->phone1 }}</td>

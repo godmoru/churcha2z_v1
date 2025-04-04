@@ -3,7 +3,6 @@
 namespace Illuminate\Auth\Passwords;
 
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
-use \App\Notifications\AdminResetPassword;
 
 trait CanResetPassword
 {
@@ -25,7 +24,6 @@ trait CanResetPassword
      */
     public function sendPasswordResetNotification($token)
     {
-        // $this->notify(new AdminResetPassword($token));
         $this->notify(new ResetPasswordNotification($token));
     }
 }
