@@ -15,6 +15,9 @@ class CreateIncomeReportSourcesTable extends Migration
     {
         Schema::create('income_report_sources', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->integer('created_by')->foreign()->references('id')->on('users');
             $table->timestamps();
         });
     }

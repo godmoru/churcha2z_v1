@@ -624,7 +624,7 @@ class HRController extends Controller
 
     }
     
-    public function postAcctountant(){
+    public function postAccountant(){
         
         $inps = Input::all();
         $accountant = \App\Accountant::find($inps['accountant']);
